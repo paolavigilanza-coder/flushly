@@ -13,175 +13,186 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap">
 <style>
 :root {
-  --coral: #D85A30;
-  --coral-light: #FAECE7;
-  --coral-mid: #F0997B;
-  --teal: #1D9E75;
-  --teal-light: #E1F5EE;
-  --amber: #EF9F27;
-  --amber-light: #FAEEDA;
-  --purple: #534AB7;
-  --purple-light: #EEEDFE;
-  --bg: #fff8f5;
-  --surface: #ffffff;
-  --surface2: #fdf4f0;
-  --text: #1a1410;
-  --text2: #6b5a52;
-  --text3: #a8968e;
-  --border: rgba(180,120,90,0.15);
-  --border2: rgba(180,120,90,0.25);
-  --radius: 16px;
-  --radius-sm: 10px;
-  --shadow: 0 2px 16px rgba(180,80,40,0.08);
+  --coral:#D85A30;--coral-light:#FAECE7;--coral-mid:#F0997B;
+  --teal:#1D9E75;--teal-light:#E1F5EE;
+  --amber:#EF9F27;--amber-light:#FAEEDA;
+  --purple:#534AB7;--purple-light:#EEEDFE;
+  --bg:#fff8f5;--surface:#ffffff;--surface2:#fdf4f0;
+  --text:#1a1410;--text2:#6b5a52;--text3:#a8968e;
+  --border:rgba(180,120,90,0.15);--border2:rgba(180,120,90,0.25);
+  --radius:16px;--radius-sm:10px;--shadow:0 2px 16px rgba(180,80,40,0.08);
 }
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-html, body { height: 100%; overflow: hidden; background: var(--bg); }
-body { font-family: 'DM Sans', sans-serif; color: var(--text); display: flex; flex-direction: column; max-width: 430px; margin: 0 auto; }
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--bg)}
+body{font-family:'DM Sans',sans-serif;color:var(--text);display:flex;flex-direction:column;max-width:430px;margin:0 auto;overflow:hidden}
 
-/* HEADER */
-.header { padding: 1rem 1.25rem 0.5rem; background: var(--bg); }
-.header-top { display: flex; align-items: center; justify-content: space-between; }
-.app-title { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--coral); }
-.header-date { font-size: 12px; color: var(--text3); }
-.today-summary { display: flex; gap: 8px; margin-top: 0.75rem; }
-.today-pill { flex: 1; background: var(--surface); border: 0.5px solid var(--border2); border-radius: 12px; padding: 8px 10px; text-align: center; }
-.today-pill .num { font-size: 20px; font-weight: 500; color: var(--text); }
-.today-pill .lbl { font-size: 10px; color: var(--text3); margin-top: 1px; }
+.login-screen{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;z-index:1000;overflow-y:auto}
+.login-screen.hidden{display:none}
+.login-logo{font-family:'DM Serif Display',serif;font-size:42px;color:var(--coral);margin-bottom:6px}
+.login-sub{font-size:14px;color:var(--text3);margin-bottom:2rem;text-align:center;line-height:1.6}
+.login-card{background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--radius);padding:1.25rem;width:100%;box-shadow:var(--shadow);margin-bottom:0.875rem}
+.login-label{font-size:12px;color:var(--text2);margin-bottom:6px;font-weight:500}
+.login-input{width:100%;font-family:'DM Sans',sans-serif;font-size:15px;padding:10px 14px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);background:var(--surface2);color:var(--text);outline:none}
+.login-input:focus{border-color:var(--coral)}
+.login-btn{width:100%;padding:13px;border-radius:var(--radius);border:none;background:var(--coral);color:white;font-family:'DM Serif Display',serif;font-size:18px;cursor:pointer;margin-top:0.75rem;transition:all 0.15s}
+.login-btn:active{transform:scale(0.98)}
+.login-hint{font-size:11px;color:var(--text3);text-align:center;line-height:1.6;margin-top:6px}
+.divider{display:flex;align-items:center;gap:10px;margin:0.5rem 0}
+.divider hr{flex:1;border:none;border-top:0.5px solid var(--border2)}
+.divider span{font-size:11px;color:var(--text3)}
+.code-display{background:var(--coral-light);border:1px solid var(--coral-mid);border-radius:var(--radius-sm);padding:10px 14px;font-size:22px;font-weight:500;letter-spacing:0.1em;color:var(--coral);text-align:center;margin:8px 0;font-family:monospace}
 
-/* NAV */
-.nav { display: flex; background: var(--surface); border-top: 0.5px solid var(--border); padding: 4px 8px; padding-bottom: env(safe-area-inset-bottom, 4px); gap: 4px; }
-.nav-btn { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 4px; border: none; background: transparent; border-radius: var(--radius-sm); cursor: pointer; color: var(--text3); font-size: 10px; transition: all 0.15s; }
-.nav-btn.active { color: var(--coral); background: var(--coral-light); }
-.nav-icon { width: 20px; height: 20px; }
+.header{padding:1rem 1.25rem 0.5rem;background:var(--bg);flex-shrink:0}
+.header-top{display:flex;align-items:center;justify-content:space-between}
+.app-title{font-family:'DM Serif Display',serif;font-size:22px;color:var(--coral)}
+.user-badge{font-size:11px;color:var(--text3);background:var(--coral-light);padding:3px 10px;border-radius:20px;cursor:pointer}
+.today-summary{display:flex;gap:8px;margin-top:0.75rem}
+.today-pill{flex:1;background:var(--surface);border:0.5px solid var(--border2);border-radius:12px;padding:8px 6px;text-align:center}
+.today-pill .num{font-size:18px;font-weight:500;color:var(--text)}
+.today-pill .lbl{font-size:9px;color:var(--text3);margin-top:1px}
+.sync-bar{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text3);margin-top:4px}
+.sync-dot{width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.sync-dot.syncing{background:var(--amber);animation:pulse 1s infinite}
+.sync-dot.error{background:var(--coral)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
 
-/* CONTENT */
-.content { flex: 1; overflow-y: auto; padding: 1rem 1.25rem; -webkit-overflow-scrolling: touch; }
-.page { display: none; }
-.page.active { display: block; }
+.nav{display:flex;background:var(--surface);border-top:0.5px solid var(--border);padding:4px 8px;padding-bottom:env(safe-area-inset-bottom,4px);gap:4px;flex-shrink:0}
+.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 4px;border:none;background:transparent;border-radius:var(--radius-sm);cursor:pointer;color:var(--text3);font-size:10px;transition:all 0.15s}
+.nav-btn.active{color:var(--coral);background:var(--coral-light)}
+.nav-icon{width:20px;height:20px}
 
-/* CARDS */
-.card { background: var(--surface); border: 0.5px solid var(--border2); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 0.875rem; box-shadow: var(--shadow); }
-.card-title { font-size: 13px; font-weight: 500; color: var(--text2); margin-bottom: 10px; letter-spacing: 0.02em; }
+.content{flex:1;overflow-y:auto;padding:1rem 1.25rem;-webkit-overflow-scrolling:touch}
+.page{display:none}.page.active{display:block}
+.card{background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:0.875rem;box-shadow:var(--shadow)}
+.card-title{font-size:13px;font-weight:500;color:var(--text2);margin-bottom:10px;letter-spacing:0.02em}
+.section-title{font-family:'DM Serif Display',serif;font-size:18px;color:var(--text);margin-bottom:0.875rem}
 
-/* INTENSITY */
-.intensity-row { display: flex; gap: 8px; justify-content: space-between; }
-.int-btn { flex: 1; aspect-ratio: 1; border-radius: 50%; border: 1.5px solid var(--border2); background: transparent; font-size: 15px; font-weight: 500; cursor: pointer; color: var(--text2); transition: all 0.18s; display: flex; align-items: center; justify-content: center; }
-.int-btn.sel-1 { background: #FAC775; border-color: #FAC775; color: #633806; }
-.int-btn.sel-2 { background: #EF9F27; border-color: #EF9F27; color: #412402; }
-.int-btn.sel-3 { background: #D85A30; border-color: #D85A30; color: white; }
-.int-btn.sel-4 { background: #993C1D; border-color: #993C1D; color: white; }
-.int-btn.sel-5 { background: #4A1B0C; border-color: #4A1B0C; color: white; }
+.intensity-row{display:flex;gap:8px;justify-content:space-between}
+.int-btn{flex:1;aspect-ratio:1;border-radius:50%;border:1.5px solid var(--border2);background:transparent;font-size:15px;font-weight:500;cursor:pointer;color:var(--text2);transition:all 0.18s;display:flex;align-items:center;justify-content:center}
+.int-btn.sel-1{background:#FAC775;border-color:#FAC775;color:#633806}
+.int-btn.sel-2{background:#EF9F27;border-color:#EF9F27;color:#412402}
+.int-btn.sel-3{background:#D85A30;border-color:#D85A30;color:white}
+.int-btn.sel-4{background:#993C1D;border-color:#993C1D;color:white}
+.int-btn.sel-5{background:#4A1B0C;border-color:#4A1B0C;color:white}
 
-/* SELECT */
-select, textarea { width: 100%; font-family: 'DM Sans', sans-serif; font-size: 14px; padding: 9px 12px; border: 0.5px solid var(--border2); border-radius: var(--radius-sm); background: var(--surface2); color: var(--text); appearance: none; outline: none; }
-select:focus, textarea:focus { border-color: var(--coral); }
-textarea { resize: none; height: 60px; }
+select,textarea{width:100%;font-family:'DM Sans',sans-serif;font-size:14px;padding:9px 12px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);background:var(--surface2);color:var(--text);appearance:none;outline:none}
+textarea{resize:none;height:60px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{padding:5px 12px;border-radius:20px;border:0.5px solid var(--border2);font-size:12px;cursor:pointer;color:var(--text2);background:var(--surface2);transition:all 0.15s}
+.chip.sel{background:var(--teal);color:white;border-color:var(--teal)}
+.add-row{display:flex;gap:6px;margin-top:8px}
+.add-row input{flex:1;font-family:'DM Sans',sans-serif;font-size:13px;padding:7px 10px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);background:var(--surface2);color:var(--text);outline:none}
+.add-row button{padding:7px 14px;border-radius:var(--radius-sm);border:0.5px solid var(--border2);background:var(--surface);font-size:13px;cursor:pointer;color:var(--text2)}
+.log-btn{width:100%;padding:14px;border-radius:var(--radius);border:none;background:var(--coral);color:white;font-family:'DM Serif Display',serif;font-size:18px;cursor:pointer;margin-top:0.25rem;transition:all 0.15s}
+.log-btn:active{transform:scale(0.98);opacity:0.9}
+.log-btn:disabled{opacity:0.6;cursor:not-allowed}
 
-/* TRIGGERS */
-.chips { display: flex; flex-wrap: wrap; gap: 6px; }
-.chip { padding: 5px 12px; border-radius: 20px; border: 0.5px solid var(--border2); font-size: 12px; cursor: pointer; color: var(--text2); background: var(--surface2); transition: all 0.15s; }
-.chip.sel { background: var(--teal); color: white; border-color: var(--teal); }
-.add-row { display: flex; gap: 6px; margin-top: 8px; }
-.add-row input { flex: 1; font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 7px 10px; border: 0.5px solid var(--border2); border-radius: var(--radius-sm); background: var(--surface2); color: var(--text); outline: none; }
-.add-row input:focus { border-color: var(--coral); }
-.add-row button { padding: 7px 14px; border-radius: var(--radius-sm); border: 0.5px solid var(--border2); background: var(--surface); font-size: 13px; cursor: pointer; color: var(--text2); }
+.sleep-row{display:flex;align-items:center;gap:10px}
+.sleep-row label{font-size:13px;color:var(--text2);flex:1}
+.sleep-row input[type=range]{flex:2;accent-color:var(--purple)}
+.sleep-val{font-size:13px;font-weight:500;color:var(--purple);width:40px;text-align:right}
+.sleep-qual{display:flex;gap:6px;margin-top:8px}
+.sq-btn{flex:1;padding:6px;border-radius:var(--radius-sm);border:0.5px solid var(--border2);background:transparent;font-size:11px;cursor:pointer;color:var(--text2);transition:all 0.15s}
+.sq-btn.sel{background:var(--purple-light);color:var(--purple);border-color:var(--purple);font-weight:500}
 
-/* LOG BTN */
-.log-btn { width: 100%; padding: 14px; border-radius: var(--radius); border: none; background: var(--coral); color: white; font-family: 'DM Serif Display', serif; font-size: 18px; cursor: pointer; margin-top: 0.25rem; transition: all 0.15s; letter-spacing: 0.01em; }
-.log-btn:active { transform: scale(0.98); opacity: 0.9; }
+.stats-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:0.875rem}
+.stat-card{background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--radius-sm);padding:12px 10px;text-align:center;box-shadow:var(--shadow)}
+.stat-num{font-size:22px;font-weight:500}
+.stat-lbl{font-size:10px;color:var(--text3);margin-top:2px}
 
-/* SLEEP WIDGET */
-.sleep-row { display: flex; align-items: center; gap: 10px; }
-.sleep-row label { font-size: 13px; color: var(--text2); flex: 1; }
-.sleep-row input[type=range] { flex: 2; accent-color: var(--purple); }
-.sleep-val { font-size: 13px; font-weight: 500; color: var(--purple); width: 40px; text-align: right; }
-.sleep-qual { display: flex; gap: 6px; margin-top: 8px; }
-.sq-btn { flex: 1; padding: 6px; border-radius: var(--radius-sm); border: 0.5px solid var(--border2); background: transparent; font-size: 11px; cursor: pointer; color: var(--text2); text-align: center; transition: all 0.15s; }
-.sq-btn.sel { background: var(--purple-light); color: var(--purple); border-color: var(--purple); font-weight: 500; }
+.bar-chart{display:flex;align-items:flex-end;gap:2px;height:90px}
+.bar-wrap{flex:1;height:100%;display:flex;align-items:flex-end}
+.bar{width:100%;border-radius:3px 3px 0 0;min-height:2px}
+.line-chart{position:relative;height:120px;margin:4px 0}
+.line-chart svg{width:100%;height:100%}
 
-/* HISTORY */
-.event-row { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 0.5px solid var(--border); }
-.event-row:last-child { border-bottom: none; }
-.heat-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
-.h1 { background: #FAC775; }
-.h2 { background: #EF9F27; }
-.h3 { background: #D85A30; }
-.h4 { background: #993C1D; }
-.h5 { background: #4A1B0C; }
-.ev-time { font-size: 11px; color: var(--text3); }
-.ev-detail { font-size: 13px; color: var(--text); margin-top: 1px; }
-.ev-triggers { font-size: 11px; color: var(--text3); margin-top: 2px; }
-.ev-sleep { font-size: 11px; color: var(--purple); margin-top: 1px; }
+.event-row{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:0.5px solid var(--border)}
+.event-row:last-child{border-bottom:none}
+.heat-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.h1{background:#FAC775}.h2{background:#EF9F27}.h3{background:#D85A30}.h4{background:#993C1D}.h5{background:#4A1B0C}
+.ev-time{font-size:11px;color:var(--text3)}
+.ev-triggers{font-size:11px;color:var(--text3);margin-top:2px}
+.ev-sleep{font-size:11px;color:var(--purple);margin-top:1px}
 
-/* STATS GRID */
-.stats-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; margin-bottom: 0.875rem; }
-.stat-card { background: var(--surface); border: 0.5px solid var(--border2); border-radius: var(--radius-sm); padding: 12px 10px; text-align: center; box-shadow: var(--shadow); }
-.stat-num { font-size: 24px; font-weight: 500; color: var(--text); }
-.stat-lbl { font-size: 10px; color: var(--text3); margin-top: 2px; }
+.corr-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:0.5px solid var(--border)}
+.corr-row:last-child{border-bottom:none}
+.corr-name{font-size:13px;flex:1;color:var(--text)}
+.bar-track{width:90px;height:6px;background:var(--coral-light);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;background:var(--coral);border-radius:3px}
+.corr-pct{font-size:12px;color:var(--text2);width:30px;text-align:right;font-weight:500}
+.corr-count{font-size:10px;color:var(--text3);width:32px;text-align:right}
+.co-badge{font-size:10px;padding:2px 6px;border-radius:10px;background:var(--amber-light);color:var(--amber);font-weight:500}
 
-/* CHART */
-.bar-chart { display: flex; align-items: flex-end; gap: 2px; height: 90px; }
-.bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; height: 100%; justify-content: flex-end; }
-.bar { width: 100%; border-radius: 3px 3px 0 0; min-height: 2px; transition: height 0.4s; }
-.bar-label { font-size: 8px; color: var(--text3); }
+.tab-row{display:flex;gap:4px;margin-bottom:1rem;background:var(--surface2);border-radius:var(--radius-sm);padding:3px}
+.tab-btn{flex:1;padding:7px;border:none;background:transparent;border-radius:8px;font-size:12px;cursor:pointer;color:var(--text3);transition:all 0.15s}
+.tab-btn.active{background:var(--surface);color:var(--text);font-weight:500;border:0.5px solid var(--border2)}
 
-/* LINE CHART */
-.line-chart { position: relative; height: 120px; margin: 4px 0; }
-.line-chart svg { width: 100%; height: 100%; }
+.remind-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:0.5px solid var(--border)}
+.remind-row:last-child{border-bottom:none}
+.pdf-btn{width:100%;padding:12px;border-radius:var(--radius-sm);border:1.5px solid var(--coral);background:transparent;color:var(--coral);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all 0.15s}
+.pdf-btn:hover{background:var(--coral-light)}
 
-/* CORRELATIONS */
-.corr-row { display: flex; align-items: center; gap: 8px; padding: 7px 0; border-bottom: 0.5px solid var(--border); }
-.corr-row:last-child { border-bottom: none; }
-.corr-name { font-size: 13px; flex: 1; color: var(--text); }
-.bar-track { width: 90px; height: 6px; background: var(--coral-light); border-radius: 3px; overflow: hidden; }
-.bar-fill { height: 100%; background: var(--coral); border-radius: 3px; }
-.corr-pct { font-size: 12px; color: var(--text2); width: 30px; text-align: right; font-weight: 500; }
-.corr-count { font-size: 10px; color: var(--text3); width: 32px; text-align: right; }
-.co-badge { font-size: 10px; padding: 2px 6px; border-radius: 10px; background: var(--amber-light); color: var(--amber); font-weight: 500; }
-
-/* REMINDER */
-.remind-row { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-bottom: 0.5px solid var(--border); }
-.remind-row:last-child { border-bottom: none; }
-.toggle { position: relative; width: 40px; height: 22px; }
-.toggle input { opacity: 0; width: 0; height: 0; }
-.slider-tog { position: absolute; inset: 0; background: var(--border2); border-radius: 11px; transition: 0.3s; cursor: pointer; }
-.slider-tog:before { content: ''; position: absolute; width: 18px; height: 18px; left: 2px; top: 2px; background: white; border-radius: 50%; transition: 0.3s; }
-input:checked + .slider-tog { background: var(--teal); }
-input:checked + .slider-tog:before { transform: translateX(18px); }
-
-/* PDF BTN */
-.pdf-btn { width: 100%; padding: 12px; border-radius: var(--radius-sm); border: 1.5px solid var(--coral); background: transparent; color: var(--coral); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
-.pdf-btn:hover { background: var(--coral-light); }
-
-/* TOAST */
-.toast { position: fixed; bottom: 5rem; left: 50%; transform: translateX(-50%) translateY(10px); background: var(--teal); color: white; padding: 9px 22px; border-radius: 20px; font-size: 13px; opacity: 0; transition: all 0.3s; pointer-events: none; z-index: 999; white-space: nowrap; }
-.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-.empty-state { text-align: center; padding: 2rem 1rem; color: var(--text3); font-size: 14px; }
-.section-title { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--text); margin-bottom: 0.875rem; }
-.tab-row { display: flex; gap: 4px; margin-bottom: 1rem; background: var(--surface2); border-radius: var(--radius-sm); padding: 3px; }
-.tab-btn { flex: 1; padding: 7px; border: none; background: transparent; border-radius: 8px; font-size: 12px; cursor: pointer; color: var(--text3); transition: all 0.15s; }
-.tab-btn.active { background: var(--surface); color: var(--text); font-weight: 500; border: 0.5px solid var(--border2); }
+.toast{position:fixed;bottom:5rem;left:50%;transform:translateX(-50%) translateY(10px);background:var(--teal);color:white;padding:9px 22px;border-radius:20px;font-size:13px;opacity:0;transition:all 0.3s;pointer-events:none;z-index:999;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.empty-state{text-align:center;padding:2rem 1rem;color:var(--text3);font-size:14px}
+.spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,0.3);border-top-color:white;border-radius:50%;animation:spin 0.8s linear infinite;display:inline-block;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
 
+<!-- LOGIN -->
+<div class="login-screen" id="login-screen">
+  <div class="login-logo">flushly</div>
+  <div class="login-sub">Il tuo diario personale delle vampate.<br>I tuoi dati, sempre con te.</div>
+
+  <div class="login-card">
+    <div class="login-label">Prima volta? Inserisci il tuo nome</div>
+    <input class="login-input" type="text" id="input-name" placeholder="Es. Maria" maxlength="20" oninput="this.value=this.value.replace(/[^a-zA-ZÀ-ÿ ]/g,'')">
+    <button class="login-btn" onclick="createUser()">Crea il mio diario</button>
+    <div class="login-hint">Riceverai un codice personale da conservare</div>
+  </div>
+
+  <div class="divider"><hr><span>hai già un codice?</span><hr></div>
+
+  <div class="login-card">
+    <div class="login-label">Inserisci il tuo codice personale</div>
+    <input class="login-input" type="text" id="input-code" placeholder="Es. MARIA-4821" maxlength="20" style="text-transform:uppercase;letter-spacing:0.08em" oninput="this.value=this.value.toUpperCase()">
+    <button class="login-btn" onclick="loginWithCode()" style="background:var(--teal)">Accedi al mio diario</button>
+  </div>
+</div>
+
+<!-- CODICE MOSTRATO DOPO REGISTRAZIONE -->
+<div class="login-screen hidden" id="code-screen">
+  <div class="login-logo">flushly</div>
+  <div class="login-card" style="text-align:center">
+    <div style="font-size:14px;color:var(--text2);margin-bottom:8px;font-weight:500">Il tuo codice personale è:</div>
+    <div class="code-display" id="code-display"></div>
+    <div style="font-size:12px;color:var(--text3);margin-top:8px;line-height:1.7">📸 Fai uno screenshot di questa schermata.<br>Serve per accedere da qualsiasi dispositivo.</div>
+    <button class="login-btn" onclick="enterApp()" style="margin-top:1rem">Inizia a usare Flushly</button>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app" style="display:none;flex-direction:column;height:100%">
+
 <div class="header">
   <div class="header-top">
     <div class="app-title">flushly</div>
-    <div class="header-date" id="header-date"></div>
+    <div class="user-badge" id="user-badge" onclick="showPage('settings')"></div>
   </div>
+  <div class="sync-bar"><div class="sync-dot" id="sync-dot"></div><span id="sync-label">sincronizzato</span></div>
   <div class="today-summary">
     <div class="today-pill"><div class="num" id="today-count">0</div><div class="lbl">oggi</div></div>
-    <div class="today-pill"><div class="num" id="week-count">0</div><div class="lbl">questa settimana</div></div>
-    <div class="today-pill"><div class="num" id="avg-int">—</div><div class="lbl">intensità media</div></div>
-    <div class="today-pill"><div class="num" id="sleep-avg">—</div><div class="lbl">sonno medio</div></div>
+    <div class="today-pill"><div class="num" id="week-count">0</div><div class="lbl">7 giorni</div></div>
+    <div class="today-pill"><div class="num" id="avg-int">—</div><div class="lbl">intensità</div></div>
+    <div class="today-pill"><div class="num" id="sleep-avg">—</div><div class="lbl">sonno</div></div>
   </div>
 </div>
 
 <div class="content">
 
-  <!-- LOG PAGE -->
+  <!-- LOG -->
   <div class="page active" id="page-log">
     <div class="card">
       <div class="card-title">Intensità della vampata</div>
@@ -192,12 +203,11 @@ input:checked + .slider-tog:before { transform: translateX(18px); }
         <button class="int-btn" onclick="setIntensity(4)">4</button>
         <button class="int-btn" onclick="setIntensity(5)">5</button>
       </div>
-      <div style="display:flex; justify-content:space-between; margin-top:6px;">
-        <span style="font-size:10px; color:var(--text3)">lieve</span>
-        <span style="font-size:10px; color:var(--text3)">intensa</span>
+      <div style="display:flex;justify-content:space-between;margin-top:6px">
+        <span style="font-size:10px;color:var(--text3)">lieve</span>
+        <span style="font-size:10px;color:var(--text3)">intensa</span>
       </div>
     </div>
-
     <div class="card">
       <div class="card-title">Durata stimata</div>
       <select id="duration">
@@ -208,16 +218,14 @@ input:checked + .slider-tog:before { transform: translateX(18px); }
         <option value="15">più di 10 minuti</option>
       </select>
     </div>
-
     <div class="card">
-      <div class="card-title">Fattori presenti nelle ultime ore <span style="color:var(--text3); font-weight:300">(seleziona tutto ciò che è vero)</span></div>
+      <div class="card-title">Fattori nelle ultime ore <span style="color:var(--text3);font-weight:300">(seleziona tutto ciò che è vero)</span></div>
       <div class="chips" id="trigger-chips"></div>
       <div class="add-row">
-        <input type="text" id="new-trigger" placeholder="Aggiungi fattore personale..." onkeydown="if(event.key==='Enter')addTrigger()">
+        <input type="text" id="new-trigger" placeholder="Aggiungi fattore..." onkeydown="if(event.key==='Enter')addTrigger()">
         <button onclick="addTrigger()">+ Aggiungi</button>
       </div>
     </div>
-
     <div class="card">
       <div class="card-title">Sonno dell'ultima notte</div>
       <div class="sleep-row">
@@ -232,17 +240,15 @@ input:checked + .slider-tog:before { transform: translateX(18px); }
         <button class="sq-btn" onclick="setSleepQ('ottimo')">Ottimo</button>
       </div>
     </div>
-
     <div class="card">
       <div class="card-title">Note libere (opzionale)</div>
-      <textarea id="note" placeholder="Come ti sentivi? Dove eri? Cosa stavi facendo?"></textarea>
+      <textarea id="note" placeholder="Come ti sentivi? Dove eri?"></textarea>
     </div>
-
-    <button class="log-btn" onclick="logEvent()">Registra vampata</button>
+    <button class="log-btn" id="log-btn" onclick="logEvent()">Registra vampata</button>
     <div style="height:1rem"></div>
   </div>
 
-  <!-- HISTORY PAGE -->
+  <!-- STORICO -->
   <div class="page" id="page-history">
     <div class="section-title">Storico</div>
     <div class="stats-grid">
@@ -250,24 +256,21 @@ input:checked + .slider-tog:before { transform: translateX(18px); }
       <div class="stat-card"><div class="stat-num" id="h-week">0</div><div class="stat-lbl">7 giorni</div></div>
       <div class="stat-card"><div class="stat-num" id="h-total">0</div><div class="stat-lbl">totale</div></div>
     </div>
-
     <div class="card">
-      <div class="card-title">Vampate per ora del giorno</div>
+      <div class="card-title">Distribuzione oraria</div>
       <div class="bar-chart" id="hour-chart"></div>
-      <div style="display:flex; justify-content:space-between; margin-top:3px;">
-        <span style="font-size:9px; color:var(--text3)">00:00</span>
-        <span style="font-size:9px; color:var(--text3)">06:00</span>
-        <span style="font-size:9px; color:var(--text3)">12:00</span>
-        <span style="font-size:9px; color:var(--text3)">18:00</span>
-        <span style="font-size:9px; color:var(--text3)">24:00</span>
+      <div style="display:flex;justify-content:space-between;margin-top:3px">
+        <span style="font-size:9px;color:var(--text3)">00:00</span>
+        <span style="font-size:9px;color:var(--text3)">06:00</span>
+        <span style="font-size:9px;color:var(--text3)">12:00</span>
+        <span style="font-size:9px;color:var(--text3)">18:00</span>
+        <span style="font-size:9px;color:var(--text3)">24:00</span>
       </div>
     </div>
-
     <div class="card">
       <div class="card-title">Trend ultime 2 settimane</div>
       <div class="line-chart"><svg id="trend-svg"></svg></div>
     </div>
-
     <div class="card">
       <div class="card-title">Episodi recenti</div>
       <div id="event-list"><div class="empty-state">Nessun episodio ancora</div></div>
@@ -275,21 +278,16 @@ input:checked + .slider-tog:before { transform: translateX(18px); }
     <div style="height:1rem"></div>
   </div>
 
-  <!-- INSIGHTS PAGE -->
+  <!-- ANALISI -->
   <div class="page" id="page-insights">
     <div class="section-title">Correlazioni</div>
-    <div style="font-size:12px; color:var(--text3); margin-bottom:0.875rem; line-height:1.6;">L'app analizza quali fattori compaiono più spesso prima delle vampate. Più episodi registri, più le correlazioni diventano affidabili.</div>
-
+    <div style="font-size:12px;color:var(--text3);margin-bottom:0.875rem;line-height:1.6">L'app analizza quali fattori compaiono più spesso prima delle vampate. Più dati registri, più diventano accurate.</div>
     <div class="tab-row">
-      <button class="tab-btn active" onclick="setInsightTab('freq')">Per frequenza</button>
-      <button class="tab-btn" onclick="setInsightTab('intensity')">Per intensità</button>
+      <button class="tab-btn active" onclick="setInsightTab('freq')">Frequenza</button>
+      <button class="tab-btn" onclick="setInsightTab('intensity')">Intensità</button>
       <button class="tab-btn" onclick="setInsightTab('combo')">Combinazioni</button>
     </div>
-
-    <div class="card" id="corr-card">
-      <div id="corr-list"><div class="empty-state">Registra almeno 5 episodi per vedere le correlazioni</div></div>
-    </div>
-
+    <div class="card"><div id="corr-list"><div class="empty-state">Registra almeno 5 episodi</div></div></div>
     <div class="card">
       <div class="card-title">Sonno e vampate</div>
       <div id="sleep-insight"><div class="empty-state">Dati insufficienti</div></div>
@@ -297,418 +295,380 @@ input:checked + .slider-tog:before { transform: translateX(18px); }
     <div style="height:1rem"></div>
   </div>
 
-  <!-- SETTINGS PAGE -->
+  <!-- IMPOSTAZIONI -->
   <div class="page" id="page-settings">
     <div class="section-title">Impostazioni</div>
-
     <div class="card">
-      <div class="card-title">Notifiche e reminder</div>
+      <div class="card-title">Profilo</div>
+      <div class="remind-row">
+        <div style="font-size:13px;color:var(--text)">Nome</div>
+        <div style="font-size:13px;font-weight:500;color:var(--coral)" id="profile-name"></div>
+      </div>
       <div class="remind-row">
         <div>
-          <div style="font-size:13px; font-weight:500; color:var(--text)">Reminder serale</div>
-          <div style="font-size:11px; color:var(--text3)">Ricordati di registrare la giornata</div>
+          <div style="font-size:13px;color:var(--text)">Codice personale</div>
+          <div style="font-size:11px;color:var(--text3)">Usalo per accedere da altri dispositivi</div>
         </div>
-        <label class="toggle"><input type="checkbox" id="notif-evening" onchange="toggleNotif('evening')"><span class="slider-tog"></span></label>
-      </div>
-      <div class="remind-row" id="evening-time-row" style="display:none">
-        <label style="font-size:13px; color:var(--text2)">Orario reminder</label>
-        <input type="time" value="20:00" id="evening-time" style="width:auto; padding:5px 8px; font-size:13px; border:0.5px solid var(--border2); border-radius:8px; background:var(--surface2); color:var(--text); outline:none;">
+        <div style="font-size:14px;font-weight:500;font-family:monospace;color:var(--coral);letter-spacing:0.06em" id="profile-code"></div>
       </div>
     </div>
-
     <div class="card">
-      <div class="card-title">Esportazione dati</div>
-      <p style="font-size:12px; color:var(--text3); margin-bottom:10px; line-height:1.6;">Genera un report da portare al medico con tutti gli episodi, i fattori più frequenti e i grafici del sonno.</p>
+      <div class="card-title">Esportazione</div>
+      <p style="font-size:12px;color:var(--text3);margin-bottom:10px;line-height:1.6">Genera un report completo da portare al medico.</p>
       <button class="pdf-btn" onclick="exportPDF()">Esporta report per il medico</button>
     </div>
-
     <div class="card">
       <div class="card-title">Dati</div>
       <div class="remind-row">
-        <div style="font-size:13px; color:var(--text)">Episodi registrati</div>
-        <div style="font-size:14px; font-weight:500; color:var(--coral)" id="total-episodes">0</div>
+        <div style="font-size:13px">Episodi registrati</div>
+        <div style="font-size:14px;font-weight:500;color:var(--coral)" id="total-episodes">0</div>
       </div>
-      <div class="remind-row">
-        <div style="font-size:13px; color:var(--text)">Fattori personalizzati</div>
-        <div style="font-size:14px; font-weight:500; color:var(--coral)" id="custom-triggers">0</div>
-      </div>
-      <div style="margin-top:10px;">
-        <button onclick="clearData()" style="font-size:12px; color:var(--text3); background:none; border:none; cursor:pointer; text-decoration:underline; padding:0;">Cancella tutti i dati</button>
+      <div style="margin-top:10px;display:flex;gap:16px">
+        <button onclick="logout()" style="font-size:12px;color:var(--text3);background:none;border:none;cursor:pointer;text-decoration:underline;padding:0">Esci (cambia utente)</button>
+        <button onclick="clearData()" style="font-size:12px;color:var(--coral);background:none;border:none;cursor:pointer;text-decoration:underline;padding:0">Cancella tutti i dati</button>
       </div>
     </div>
-
     <div class="card">
-      <div class="card-title">Informazioni</div>
-      <p style="font-size:12px; color:var(--text3); line-height:1.7;">Flushly salva tutti i dati <strong>solo sul tuo dispositivo</strong>. Nessun dato viene inviato a server esterni. I dati sono tuoi.</p>
+      <p style="font-size:12px;color:var(--text3);line-height:1.7">I dati sono salvati nel cloud e accessibili solo con il tuo codice personale.</p>
     </div>
     <div style="height:1rem"></div>
   </div>
+
 </div>
 
-<!-- NAV -->
 <div class="nav">
   <button class="nav-btn active" id="nav-log" onclick="showPage('log')">
-    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-    Registra
+    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Registra
   </button>
   <button class="nav-btn" id="nav-history" onclick="showPage('history')">
-    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="14" y2="13"/></svg>
-    Storico
+    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="14" y2="13"/></svg>Storico
   </button>
   <button class="nav-btn" id="nav-insights" onclick="showPage('insights')">
-    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-    Analisi
+    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Analisi
   </button>
   <button class="nav-btn" id="nav-settings" onclick="showPage('settings')">
-    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-    Impostazioni
+    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06-.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Impostazioni
   </button>
 </div>
+</div>
 
-<div class="toast" id="toast">Vampata registrata</div>
+<div class="toast" id="toast"></div>
 
 <script>
-const DEFAULT_TRIGGERS = ['Caffè','Alcol','Cibo piccante','Stress','Ansia','Stanchezza','Sonno scarso','Caldo ambientale','Luoghi affollati','Attività fisica','Fumo','Cioccolato','Cibi zuccherati','Ormoni / farmaci','Pasto abbondante','Aria secca'];
+const MASTER_KEY='$2a$10$VySRFGlRZM3cHv0GY9fSr.meO149WWchUbfL9qY1f.koRrE35/wj6';
+const BASE='https://api.jsonbin.io/v3/b';
+const H={'Content-Type':'application/json','X-Master-Key':MASTER_KEY};
+const DEFAULT_TRIGGERS=['Caffè','Alcol','Cibo piccante','Stress','Ansia','Stanchezza','Sonno scarso','Caldo ambientale','Luoghi affollati','Attività fisica','Fumo','Cioccolato','Cibi zuccherati','Ormoni/farmaci','Pasto abbondante'];
 
-let state = {
-  intensity: null,
-  sleepQ: null,
-  selectedTriggers: new Set(),
-  triggers: JSON.parse(localStorage.getItem('ft_triggers') || 'null') || [...DEFAULT_TRIGGERS],
-  events: JSON.parse(localStorage.getItem('ft_events') || '[]'),
-  insightTab: 'freq'
-};
+let user=null;
+let st={intensity:null,sleepQ:null,selectedTriggers:new Set(),insightTab:'freq'};
+let ud={events:[],triggers:[...DEFAULT_TRIGGERS]};
+let syncTimer=null;
 
-function save() {
-  localStorage.setItem('ft_events', JSON.stringify(state.events));
-  localStorage.setItem('ft_triggers', JSON.stringify(state.triggers));
+function generateCode(name){
+  const c=name.trim().toUpperCase().replace(/[^A-Z]/g,'').slice(0,6);
+  return c+'-'+Math.floor(1000+Math.random()*9000);
 }
 
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
-  document.getElementById('nav-'+id).classList.add('active');
-  if (id === 'history') renderHistory();
-  if (id === 'insights') renderInsights();
-  if (id === 'settings') renderSettings();
+async function createUser(){
+  const name=document.getElementById('input-name').value.trim();
+  if(!name){showToast('Inserisci il tuo nome','#D85A30');return;}
+  const code=generateCode(name);
+  setSyncing(true,'Creazione in corso...');
+  try{
+    const payload={name,code,events:[],triggers:[...DEFAULT_TRIGGERS]};
+    const res=await fetch(BASE,{method:'POST',headers:{...H,'X-Bin-Name':code,'X-Bin-Private':'false'},body:JSON.stringify(payload)});
+    const data=await res.json();
+    if(!data.metadata?.id)throw new Error();
+    const binId=data.metadata.id;
+    localStorage.setItem('fl_code',code);
+    localStorage.setItem('fl_binid',binId);
+    localStorage.setItem('fl_name',name);
+    user={name,code,binId};
+    ud=payload;
+    document.getElementById('code-display').textContent=code;
+    document.getElementById('login-screen').classList.add('hidden');
+    document.getElementById('code-screen').classList.remove('hidden');
+  }catch(e){showToast('Errore di connessione. Riprova.','#D85A30');}
+  setSyncing(false);
 }
 
-function setIntensity(n) {
-  state.intensity = n;
-  document.querySelectorAll('.int-btn').forEach((b,i) => {
-    b.className = 'int-btn' + (i+1 === n ? ' sel-'+n : '');
-  });
+async function loginWithCode(){
+  const code=document.getElementById('input-code').value.trim().toUpperCase();
+  if(!code){showToast('Inserisci il tuo codice','#D85A30');return;}
+  setSyncing(true,'Ricerca in corso...');
+  try{
+    const cachedBinId=localStorage.getItem('fl_binid_'+code);
+    if(cachedBinId){await loadFromBin(cachedBinId,code);setSyncing(false);return;}
+    const res=await fetch(BASE,{headers:H});
+    const bins=await res.json();
+    let found=null;
+    if(Array.isArray(bins)){for(const b of bins){if(b.snippetMeta?.name===code){found=b;break;}}}
+    if(found){localStorage.setItem('fl_binid_'+code,found.id);await loadFromBin(found.id,code);}
+    else{showToast('Codice non trovato. Controlla e riprova.','#D85A30');}
+  }catch(e){showToast('Errore di connessione. Riprova.','#D85A30');}
+  setSyncing(false);
 }
 
-function setSleepQ(q) {
-  state.sleepQ = q;
-  document.querySelectorAll('.sq-btn').forEach(b => {
-    b.classList.toggle('sel', b.textContent.toLowerCase() === q);
-  });
+async function loadFromBin(binId,code){
+  const res=await fetch(`${BASE}/${binId}/latest`,{headers:H});
+  const data=await res.json();
+  const rec=data.record;
+  if(!rec||rec.code!==code){showToast('Codice non valido','#D85A30');return;}
+  user={name:rec.name,code:rec.code,binId};
+  ud={events:rec.events||[],triggers:rec.triggers||[...DEFAULT_TRIGGERS]};
+  localStorage.setItem('fl_code',code);
+  localStorage.setItem('fl_binid',binId);
+  localStorage.setItem('fl_name',rec.name);
+  enterApp();
 }
 
-function renderTriggers() {
-  const grid = document.getElementById('trigger-chips');
-  grid.innerHTML = '';
-  state.triggers.forEach(t => {
-    const chip = document.createElement('button');
-    chip.className = 'chip' + (state.selectedTriggers.has(t) ? ' sel' : '');
-    chip.textContent = t;
-    chip.onclick = () => {
-      state.selectedTriggers.has(t) ? state.selectedTriggers.delete(t) : state.selectedTriggers.add(t);
-      renderTriggers();
-    };
-    grid.appendChild(chip);
-  });
-}
-
-function addTrigger() {
-  const inp = document.getElementById('new-trigger');
-  const val = inp.value.trim();
-  if (val && !state.triggers.includes(val)) {
-    state.triggers.push(val);
-    save();
-    renderTriggers();
-  }
-  inp.value = '';
-}
-
-function logEvent() {
-  if (!state.intensity) { showToast('Seleziona prima l\'intensità', '#D85A30'); return; }
-  const ev = {
-    ts: Date.now(),
-    intensity: state.intensity,
-    duration: parseInt(document.getElementById('duration').value),
-    triggers: [...state.selectedTriggers],
-    note: document.getElementById('note').value.trim(),
-    sleep: {
-      hours: parseFloat(document.getElementById('sleep-hours').value),
-      quality: state.sleepQ
-    }
-  };
-  state.events.unshift(ev);
-  save();
-  state.intensity = null;
-  state.sleepQ = null;
-  state.selectedTriggers.clear();
-  document.querySelectorAll('.int-btn').forEach(b => b.className = 'int-btn');
-  document.querySelectorAll('.sq-btn').forEach(b => b.classList.remove('sel'));
-  document.getElementById('note').value = '';
-  document.getElementById('sleep-hours').value = 7;
-  document.getElementById('sleep-h-val').textContent = '7.0h';
+function enterApp(){
+  document.getElementById('login-screen').classList.add('hidden');
+  document.getElementById('code-screen').classList.add('hidden');
+  const app=document.getElementById('app');
+  app.style.display='flex';
   renderTriggers();
   updateHeader();
-  showToast('Vampata registrata', '#1D9E75');
+  setSyncing(false);
 }
 
-function showToast(msg, color) {
-  const t = document.getElementById('toast');
-  t.textContent = msg || 'Fatto';
-  t.style.background = color || '#1D9E75';
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2500);
+function logout(){
+  if(!confirm('Uscire? Potrai rientrare con il tuo codice.'))return;
+  localStorage.removeItem('fl_code');localStorage.removeItem('fl_binid');localStorage.removeItem('fl_name');
+  user=null;ud={events:[],triggers:[...DEFAULT_TRIGGERS]};
+  document.getElementById('app').style.display='none';
+  document.getElementById('login-screen').classList.remove('hidden');
+  document.getElementById('input-code').value='';document.getElementById('input-name').value='';
 }
 
-function updateHeader() {
-  const now = new Date();
-  document.getElementById('header-date').textContent = now.toLocaleDateString('it-IT', {weekday:'long', day:'numeric', month:'long'});
-  const today = new Date(); today.setHours(0,0,0,0);
-  const weekAgo = today.getTime() - 7*86400000;
-  const todayEvs = state.events.filter(e => e.ts >= today.getTime());
-  const weekEvs = state.events.filter(e => e.ts >= weekAgo);
-  document.getElementById('today-count').textContent = todayEvs.length;
-  document.getElementById('week-count').textContent = weekEvs.length;
-  const avg = state.events.length ? (state.events.reduce((a,e)=>a+e.intensity,0)/state.events.length).toFixed(1) : '—';
-  document.getElementById('avg-int').textContent = avg;
-  const sleepEvs = state.events.filter(e => e.sleep && e.sleep.hours > 0).slice(0,7);
-  const sleepAvg = sleepEvs.length ? (sleepEvs.reduce((a,e)=>a+e.sleep.hours,0)/sleepEvs.length).toFixed(1)+'h' : '—';
-  document.getElementById('sleep-avg').textContent = sleepAvg;
+function setSyncing(on,label){
+  const dot=document.getElementById('sync-dot');const lbl=document.getElementById('sync-label');
+  if(!dot)return;
+  dot.className='sync-dot'+(on?' syncing':'');
+  lbl.textContent=label||(on?'sincronizzazione...':'sincronizzato');
 }
 
-function renderHistory() {
-  const evs = state.events;
-  const today = new Date(); today.setHours(0,0,0,0);
-  const weekAgo = today.getTime() - 7*86400000;
-  document.getElementById('h-today').textContent = evs.filter(e => e.ts >= today.getTime()).length;
-  document.getElementById('h-week').textContent = evs.filter(e => e.ts >= weekAgo).length;
-  document.getElementById('h-total').textContent = evs.length;
-
-  // Hour chart
-  const hours = new Array(24).fill(0);
-  evs.forEach(e => hours[new Date(e.ts).getHours()]++);
-  const maxH = Math.max(...hours, 1);
-  const hc = document.getElementById('hour-chart');
-  hc.innerHTML = hours.map((h,i) => {
-    const pct = Math.round(h/maxH*100);
-    const isNight = i < 6 || i >= 22;
-    return `<div class="bar-wrap"><div class="bar" style="height:${Math.max(pct*0.85,2)}px; background:${isNight?'#534AB7':'#D85A30'}; opacity:${h?0.85:0.15}"></div></div>`;
-  }).join('');
-
-  // Trend line chart (last 14 days)
-  const days = [];
-  for (let i=13; i>=0; i--) {
-    const d = new Date(today); d.setDate(d.getDate()-i);
-    const next = new Date(d); next.setDate(next.getDate()+1);
-    days.push({ label: d.getDate(), count: evs.filter(e => e.ts>=d.getTime() && e.ts<next.getTime()).length });
+async function syncToCloud(){
+  if(!user)return;
+  setSyncing(true);
+  try{
+    const binId=localStorage.getItem('fl_binid');if(!binId)return;
+    await fetch(`${BASE}/${binId}`,{method:'PUT',headers:H,body:JSON.stringify({name:user.name,code:user.code,events:ud.events,triggers:ud.triggers})});
+    setSyncing(false);
+  }catch(e){
+    const dot=document.getElementById('sync-dot');const lbl=document.getElementById('sync-label');
+    if(dot){dot.className='sync-dot error';lbl.textContent='errore sync';}
   }
-  const maxD = Math.max(...days.map(d=>d.count), 1);
-  const svg = document.getElementById('trend-svg');
-  const W=360, H=100, pad=16;
-  const pts = days.map((d,i) => {
-    const x = pad + (i/(days.length-1))*(W-pad*2);
-    const y = H - pad - (d.count/maxD)*(H-pad*2);
-    return {x,y,count:d.count,label:d.label};
-  });
-  const path = 'M'+pts.map(p=>p.x.toFixed(1)+','+p.y.toFixed(1)).join(' L');
-  const area = path + ` L${pts[pts.length-1].x.toFixed(1)},${H} L${pts[0].x.toFixed(1)},${H} Z`;
-  svg.innerHTML = `<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#D85A30" stop-opacity="0.2"/><stop offset="100%" stop-color="#D85A30" stop-opacity="0"/></linearGradient></defs>
-    <path d="${area}" fill="url(#g)"/>
-    <path d="${path}" fill="none" stroke="#D85A30" stroke-width="1.5" stroke-linejoin="round"/>
-    ${pts.map((p,i) => i%2===0 ? `<text x="${p.x.toFixed(1)}" y="${H}" font-size="8" fill="#a8968e" text-anchor="middle">${p.label}</text>` : '').join('')}
-    ${pts.map(p => p.count > 0 ? `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3" fill="#D85A30"/>` : '').join('')}`;
+}
 
-  // Event list
-  const list = document.getElementById('event-list');
-  if (!evs.length) { list.innerHTML = '<div class="empty-state">Nessun episodio registrato</div>'; return; }
-  list.innerHTML = evs.slice(0,30).map(e => {
-    const d = new Date(e.ts);
-    const dt = d.toLocaleDateString('it-IT',{day:'2-digit',month:'short'})+' '+d.toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'});
-    return `<div class="event-row">
-      <div class="heat-dot h${e.intensity}"></div>
-      <div style="flex:1">
-        <div class="ev-time">${dt} · ${e.duration} min · intensità ${e.intensity}/5</div>
-        <div class="ev-triggers">${e.triggers.length ? e.triggers.join(' · ') : 'nessun fattore'}</div>
-        ${e.sleep && e.sleep.hours ? `<div class="ev-sleep">sonno: ${e.sleep.hours}h${e.sleep.quality ? ' · '+e.sleep.quality : ''}</div>` : ''}
-        ${e.note ? `<div class="ev-detail" style="font-size:11px; color:var(--text3); margin-top:1px;">${e.note}</div>` : ''}
-      </div>
-    </div>`;
+function scheduleSync(){clearTimeout(syncTimer);syncTimer=setTimeout(syncToCloud,2000);}
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.getElementById('nav-'+id).classList.add('active');
+  if(id==='history')renderHistory();
+  if(id==='insights')renderInsights();
+  if(id==='settings')renderSettings();
+}
+
+function setIntensity(n){
+  st.intensity=n;
+  document.querySelectorAll('.int-btn').forEach((b,i)=>{b.className='int-btn'+(i+1===n?' sel-'+n:'');});
+}
+
+function setSleepQ(q){
+  st.sleepQ=q;
+  document.querySelectorAll('.sq-btn').forEach(b=>b.classList.toggle('sel',b.textContent.toLowerCase()===q));
+}
+
+function renderTriggers(){
+  const g=document.getElementById('trigger-chips');if(!g)return;g.innerHTML='';
+  ud.triggers.forEach(t=>{
+    const c=document.createElement('button');c.className='chip'+(st.selectedTriggers.has(t)?' sel':'');c.textContent=t;
+    c.onclick=()=>{st.selectedTriggers.has(t)?st.selectedTriggers.delete(t):st.selectedTriggers.add(t);renderTriggers();};
+    g.appendChild(c);
+  });
+}
+
+function addTrigger(){
+  const inp=document.getElementById('new-trigger');const v=inp.value.trim();
+  if(v&&!ud.triggers.includes(v)){ud.triggers.push(v);scheduleSync();renderTriggers();}
+  inp.value='';
+}
+
+async function logEvent(){
+  if(!st.intensity){showToast('Seleziona prima l\'intensità','#D85A30');return;}
+  const btn=document.getElementById('log-btn');btn.disabled=true;btn.innerHTML='<span class="spinner"></span>';
+  const ev={ts:Date.now(),intensity:st.intensity,duration:parseInt(document.getElementById('duration').value),
+    triggers:[...st.selectedTriggers],note:document.getElementById('note').value.trim(),
+    sleep:{hours:parseFloat(document.getElementById('sleep-hours').value),quality:st.sleepQ}};
+  ud.events.unshift(ev);
+  st.intensity=null;st.sleepQ=null;st.selectedTriggers.clear();
+  document.querySelectorAll('.int-btn').forEach(b=>b.className='int-btn');
+  document.querySelectorAll('.sq-btn').forEach(b=>b.classList.remove('sel'));
+  document.getElementById('note').value='';
+  document.getElementById('sleep-hours').value=7;document.getElementById('sleep-h-val').textContent='7.0h';
+  renderTriggers();updateHeader();
+  await syncToCloud();
+  btn.disabled=false;btn.textContent='Registra vampata';
+  showToast('Vampata registrata','#1D9E75');
+}
+
+function updateHeader(){
+  const evs=ud.events;
+  const today=new Date();today.setHours(0,0,0,0);
+  const weekAgo=today.getTime()-7*86400000;
+  document.getElementById('today-count').textContent=evs.filter(e=>e.ts>=today.getTime()).length;
+  document.getElementById('week-count').textContent=evs.filter(e=>e.ts>=weekAgo).length;
+  document.getElementById('avg-int').textContent=evs.length?(evs.reduce((a,e)=>a+e.intensity,0)/evs.length).toFixed(1):'—';
+  const sEvs=evs.filter(e=>e.sleep&&e.sleep.hours>0).slice(0,7);
+  document.getElementById('sleep-avg').textContent=sEvs.length?(sEvs.reduce((a,e)=>a+e.sleep.hours,0)/sEvs.length).toFixed(1)+'h':'—';
+  const badge=document.getElementById('user-badge');if(badge&&user)badge.textContent=user.name;
+}
+
+function renderHistory(){
+  const evs=ud.events;
+  const today=new Date();today.setHours(0,0,0,0);
+  const weekAgo=today.getTime()-7*86400000;
+  document.getElementById('h-today').textContent=evs.filter(e=>e.ts>=today.getTime()).length;
+  document.getElementById('h-week').textContent=evs.filter(e=>e.ts>=weekAgo).length;
+  document.getElementById('h-total').textContent=evs.length;
+  const hours=new Array(24).fill(0);evs.forEach(e=>hours[new Date(e.ts).getHours()]++);
+  const maxH=Math.max(...hours,1);
+  document.getElementById('hour-chart').innerHTML=hours.map((h,i)=>{
+    const pct=Math.round(h/maxH*100),night=i<6||i>=22;
+    return`<div class="bar-wrap"><div class="bar" style="height:${Math.max(pct*0.85,2)}px;background:${night?'#534AB7':'#D85A30'};opacity:${h?0.85:0.15}"></div></div>`;
+  }).join('');
+  const days=[];
+  for(let i=13;i>=0;i--){const d=new Date(today);d.setDate(d.getDate()-i);const n=new Date(d);n.setDate(n.getDate()+1);days.push({label:d.getDate(),count:evs.filter(e=>e.ts>=d.getTime()&&e.ts<n.getTime()).length});}
+  const maxD=Math.max(...days.map(d=>d.count),1);
+  const W=360,H=100,pad=16;
+  const pts=days.map((d,i)=>({x:pad+(i/(days.length-1))*(W-pad*2),y:H-pad-(d.count/maxD)*(H-pad*2),count:d.count,label:d.label}));
+  const path='M'+pts.map(p=>p.x.toFixed(1)+','+p.y.toFixed(1)).join(' L');
+  const area=path+` L${pts[pts.length-1].x.toFixed(1)},${H} L${pts[0].x.toFixed(1)},${H} Z`;
+  document.getElementById('trend-svg').innerHTML=`<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#D85A30" stop-opacity="0.2"/><stop offset="100%" stop-color="#D85A30" stop-opacity="0"/></linearGradient></defs>
+    <path d="${area}" fill="url(#g)"/><path d="${path}" fill="none" stroke="#D85A30" stroke-width="1.5" stroke-linejoin="round"/>
+    ${pts.map((p,i)=>i%2===0?`<text x="${p.x.toFixed(1)}" y="${H}" font-size="8" fill="#a8968e" text-anchor="middle">${p.label}</text>`:'').join('')}
+    ${pts.map(p=>p.count>0?`<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3" fill="#D85A30"/>`:'').join('')}`;
+  const list=document.getElementById('event-list');
+  if(!evs.length){list.innerHTML='<div class="empty-state">Nessun episodio registrato</div>';return;}
+  list.innerHTML=evs.slice(0,30).map(e=>{
+    const d=new Date(e.ts);
+    const dt=d.toLocaleDateString('it-IT',{day:'2-digit',month:'short'})+' '+d.toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'});
+    return`<div class="event-row"><div class="heat-dot h${e.intensity}"></div><div style="flex:1">
+      <div class="ev-time">${dt} · ${e.duration} min · intensità ${e.intensity}/5</div>
+      <div class="ev-triggers">${e.triggers.length?e.triggers.join(' · '):'nessun fattore'}</div>
+      ${e.sleep&&e.sleep.hours?`<div class="ev-sleep">sonno: ${e.sleep.hours}h${e.sleep.quality?' · '+e.sleep.quality:''}</div>`:''}
+      ${e.note?`<div style="font-size:11px;color:var(--text3);margin-top:1px">${e.note}</div>`:''}
+    </div></div>`;
   }).join('');
 }
 
-function setInsightTab(tab) {
-  state.insightTab = tab;
-  document.querySelectorAll('.tab-btn').forEach((b,i) => {
-    b.classList.toggle('active', ['freq','intensity','combo'][i] === tab);
-  });
+function setInsightTab(tab){
+  st.insightTab=tab;
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',['freq','intensity','combo'][i]===tab));
   renderInsights();
 }
 
-function renderInsights() {
-  const evs = state.events;
-  const MIN = 5;
-  const corrList = document.getElementById('corr-list');
-
-  if (evs.length < MIN) {
-    corrList.innerHTML = `<div class="empty-state">Registra almeno ${MIN} episodi per vedere le correlazioni<br><span style="font-size:11px; margin-top:4px; display:block">(hai ${evs.length} episodi)</span></div>`;
-  } else {
-    if (state.insightTab === 'freq') {
-      const counts = {};
-      evs.forEach(e => e.triggers.forEach(t => { counts[t]=(counts[t]||0)+1; }));
-      const sorted = Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,10);
-      const max = sorted[0]?.[1]||1;
-      corrList.innerHTML = sorted.length ? sorted.map(([t,c]) => {
-        const pct = Math.round(c/evs.length*100);
-        const w = Math.round(c/max*100);
-        return `<div class="corr-row">
-          <div class="corr-name">${t}</div>
-          <div class="bar-track"><div class="bar-fill" style="width:${w}%"></div></div>
-          <div class="corr-pct">${pct}%</div>
-          <div class="corr-count">${c} vol.</div>
-        </div>`;
-      }).join('') : '<div class="empty-state">Nessun fattore registrato</div>';
-
-    } else if (state.insightTab === 'intensity') {
-      const tMap = {};
-      evs.forEach(e => e.triggers.forEach(t => {
-        if (!tMap[t]) tMap[t] = {sum:0, count:0};
-        tMap[t].sum += e.intensity; tMap[t].count++;
-      }));
-      const sorted = Object.entries(tMap).filter(([,v])=>v.count>=2).sort((a,b)=>(b[1].sum/b[1].count)-(a[1].sum/a[1].count)).slice(0,10);
-      const max = sorted[0] ? sorted[0][1].sum/sorted[0][1].count : 1;
-      corrList.innerHTML = sorted.length ? sorted.map(([t,v]) => {
-        const avg = (v.sum/v.count).toFixed(1);
-        const w = Math.round((v.sum/v.count)/max*100);
-        return `<div class="corr-row">
-          <div class="corr-name">${t}</div>
-          <div class="bar-track"><div class="bar-fill" style="width:${w}%; background:var(--amber)"></div></div>
-          <div class="corr-pct">${avg}/5</div>
-          <div class="corr-count">${v.count} vol.</div>
-        </div>`;
-      }).join('') : '<div class="empty-state">Dati insufficienti (almeno 2 episodi per fattore)</div>';
-
-    } else if (state.insightTab === 'combo') {
-      const combos = {};
-      evs.forEach(e => {
-        const t = e.triggers;
-        for (let i=0; i<t.length; i++) for (let j=i+1; j<t.length; j++) {
-          const k = [t[i],t[j]].sort().join(' + ');
-          combos[k] = (combos[k]||0)+1;
-        }
-      });
-      const sorted = Object.entries(combos).filter(([,c])=>c>=2).sort((a,b)=>b[1]-a[1]).slice(0,8);
-      corrList.innerHTML = sorted.length ? sorted.map(([combo,c]) => {
-        const pct = Math.round(c/evs.length*100);
-        return `<div class="corr-row">
-          <div class="corr-name" style="font-size:12px">${combo}</div>
-          <span class="co-badge">${c}x</span>
-          <div class="corr-pct">${pct}%</div>
-        </div>`;
-      }).join('') : '<div class="empty-state">Nessuna combinazione frequente ancora</div>';
+function renderInsights(){
+  const evs=ud.events;const MIN=5;const corrList=document.getElementById('corr-list');
+  if(evs.length<MIN){corrList.innerHTML=`<div class="empty-state">Registra almeno ${MIN} episodi<br><span style="font-size:11px">(hai ${evs.length})</span></div>`;}
+  else{
+    if(st.insightTab==='freq'){
+      const counts={};evs.forEach(e=>e.triggers.forEach(t=>{counts[t]=(counts[t]||0)+1;}));
+      const sorted=Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,10);const max=sorted[0]?.[1]||1;
+      corrList.innerHTML=sorted.length?sorted.map(([t,c])=>{const pct=Math.round(c/evs.length*100),w=Math.round(c/max*100);
+        return`<div class="corr-row"><div class="corr-name">${t}</div><div class="bar-track"><div class="bar-fill" style="width:${w}%"></div></div><div class="corr-pct">${pct}%</div><div class="corr-count">${c} vol.</div></div>`;
+      }).join(''):'<div class="empty-state">Nessun fattore registrato</div>';
+    }else if(st.insightTab==='intensity'){
+      const tMap={};evs.forEach(e=>e.triggers.forEach(t=>{if(!tMap[t])tMap[t]={sum:0,count:0};tMap[t].sum+=e.intensity;tMap[t].count++;}));
+      const sorted=Object.entries(tMap).filter(([,v])=>v.count>=2).sort((a,b)=>(b[1].sum/b[1].count)-(a[1].sum/a[1].count)).slice(0,10);
+      const max=sorted[0]?sorted[0][1].sum/sorted[0][1].count:1;
+      corrList.innerHTML=sorted.length?sorted.map(([t,v])=>{const avg=(v.sum/v.count).toFixed(1),w=Math.round((v.sum/v.count)/max*100);
+        return`<div class="corr-row"><div class="corr-name">${t}</div><div class="bar-track"><div class="bar-fill" style="width:${w}%;background:var(--amber)"></div></div><div class="corr-pct">${avg}/5</div><div class="corr-count">${v.count} vol.</div></div>`;
+      }).join(''):'<div class="empty-state">Almeno 2 episodi per fattore</div>';
+    }else{
+      const combos={};evs.forEach(e=>{const t=e.triggers;for(let i=0;i<t.length;i++)for(let j=i+1;j<t.length;j++){const k=[t[i],t[j]].sort().join(' + ');combos[k]=(combos[k]||0)+1;}});
+      const sorted=Object.entries(combos).filter(([,c])=>c>=2).sort((a,b)=>b[1]-a[1]).slice(0,8);
+      corrList.innerHTML=sorted.length?sorted.map(([combo,c])=>`<div class="corr-row"><div class="corr-name" style="font-size:12px">${combo}</div><span class="co-badge">${c}x</span><div class="corr-pct">${Math.round(c/evs.length*100)}%</div></div>`).join(''):'<div class="empty-state">Nessuna combinazione frequente ancora</div>';
     }
   }
-
-  // Sleep insight
-  const sleepInsight = document.getElementById('sleep-insight');
-  const sleepEvs = evs.filter(e => e.sleep && e.sleep.hours > 0);
-  if (sleepEvs.length < 3) {
-    sleepInsight.innerHTML = '<div class="empty-state">Registra il sonno per almeno 3 episodi</div>';
-  } else {
-    const poor = sleepEvs.filter(e => e.sleep.hours < 6);
-    const good = sleepEvs.filter(e => e.sleep.hours >= 7);
-    const poorAvg = poor.length ? (poor.reduce((a,e)=>a+e.intensity,0)/poor.length).toFixed(1) : null;
-    const goodAvg = good.length ? (good.reduce((a,e)=>a+e.intensity,0)/good.length).toFixed(1) : null;
-    sleepInsight.innerHTML = `
-      <div class="corr-row"><div class="corr-name">Dopo notti brevi (&lt;6h)</div><div class="corr-pct" style="color:var(--coral)">${poorAvg ? 'Int. '+poorAvg : '—'}</div></div>
-      <div class="corr-row"><div class="corr-name">Dopo notti buone (≥7h)</div><div class="corr-pct" style="color:var(--teal)">${goodAvg ? 'Int. '+goodAvg : '—'}</div></div>
-      <div style="font-size:11px; color:var(--text3); margin-top:8px; line-height:1.6">${poorAvg && goodAvg ? (parseFloat(poorAvg)>parseFloat(goodAvg) ? 'Le vampate tendono ad essere più intense dopo notti brevi.' : 'Il sonno non sembra influire significativamente sull\'intensità.') : 'Dati insufficienti per un confronto.'}</div>`;
+  const sEvs=evs.filter(e=>e.sleep&&e.sleep.hours>0);
+  const si=document.getElementById('sleep-insight');
+  if(sEvs.length<3){si.innerHTML='<div class="empty-state">Registra il sonno per almeno 3 episodi</div>';}
+  else{
+    const poor=sEvs.filter(e=>e.sleep.hours<6),good=sEvs.filter(e=>e.sleep.hours>=7);
+    const pA=poor.length?(poor.reduce((a,e)=>a+e.intensity,0)/poor.length).toFixed(1):null;
+    const gA=good.length?(good.reduce((a,e)=>a+e.intensity,0)/good.length).toFixed(1):null;
+    si.innerHTML=`<div class="corr-row"><div class="corr-name">Dopo notti brevi (&lt;6h)</div><div class="corr-pct" style="color:var(--coral)">${pA?'Int. '+pA:'—'}</div></div>
+      <div class="corr-row"><div class="corr-name">Dopo notti buone (≥7h)</div><div class="corr-pct" style="color:var(--teal)">${gA?'Int. '+gA:'—'}</div></div>
+      <div style="font-size:11px;color:var(--text3);margin-top:8px;line-height:1.6">${pA&&gA?(parseFloat(pA)>parseFloat(gA)?'Le vampate tendono ad essere più intense dopo notti brevi.':'Il sonno non sembra influire significativamente sull\'intensità.'):'Dati insufficienti.'}</div>`;
   }
 }
 
-function renderSettings() {
-  document.getElementById('total-episodes').textContent = state.events.length;
-  document.getElementById('custom-triggers').textContent = state.triggers.filter(t => !DEFAULT_TRIGGERS.includes(t)).length;
+function renderSettings(){
+  if(user){document.getElementById('profile-name').textContent=user.name;document.getElementById('profile-code').textContent=user.code;}
+  document.getElementById('total-episodes').textContent=ud.events.length;
 }
 
-function toggleNotif(type) {
-  const cb = document.getElementById('notif-'+type);
-  const row = document.getElementById(type+'-time-row');
-  if (row) row.style.display = cb.checked ? 'flex' : 'none';
-  if (cb.checked && 'Notification' in window) {
-    Notification.requestPermission().then(p => {
-      if (p !== 'granted') { cb.checked = false; if(row) row.style.display='none'; showToast('Permesso notifiche negato','#D85A30'); }
-      else showToast('Reminder attivato','#1D9E75');
-    });
-  }
-}
-
-function exportPDF() {
-  const evs = state.events;
-  if (!evs.length) { showToast('Nessun dato da esportare','#D85A30'); return; }
-  const today = new Date().toLocaleDateString('it-IT');
-  const counts = {};
-  evs.forEach(e => e.triggers.forEach(t => { counts[t]=(counts[t]||0)+1; }));
-  const top5 = Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,5);
-  const avgInt = (evs.reduce((a,e)=>a+e.intensity,0)/evs.length).toFixed(1);
-  const win = window.open('','_blank');
+function exportPDF(){
+  const evs=ud.events;if(!evs.length){showToast('Nessun dato da esportare','#D85A30');return;}
+  const counts={};evs.forEach(e=>e.triggers.forEach(t=>{counts[t]=(counts[t]||0)+1;}));
+  const top5=Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  const avg=(evs.reduce((a,e)=>a+e.intensity,0)/evs.length).toFixed(1);
+  const win=window.open('','_blank');
   win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Report Flushly</title>
   <style>body{font-family:Georgia,serif;max-width:700px;margin:40px auto;color:#1a1410;line-height:1.7;padding:0 20px}
-  h1{color:#D85A30;font-size:28px;margin-bottom:4px}
-  h2{font-size:16px;margin:24px 0 8px;border-bottom:1px solid #eee;padding-bottom:4px}
-  .meta{font-size:13px;color:#6b5a52;margin-bottom:24px}
+  h1{color:#D85A30;font-size:28px}h2{font-size:16px;margin:24px 0 8px;border-bottom:1px solid #eee;padding-bottom:4px}
+  .meta{font-size:13px;color:#6b5a52;margin-bottom:24px}.stat{display:inline-block;margin-right:24px}
+  .num{font-size:28px;font-weight:bold;color:#D85A30}.lbl{font-size:11px;color:#6b5a52}
   table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
-  th{text-align:left;padding:6px 8px;background:#fff8f5;font-size:11px;color:#6b5a52;border-bottom:1px solid #eee}
-  td{padding:6px 8px;border-bottom:1px solid #f5f0ee}
-  .stat{display:inline-block;margin-right:24px;margin-bottom:8px}
-  .stat .num{font-size:28px;font-weight:bold;color:#D85A30}
-  .stat .lbl{font-size:11px;color:#6b5a52}
-  @media print{body{margin:20px}}</style></head><body>
-  <h1>flushly — Report per il medico</h1>
-  <div class="meta">Generato il ${today} · ${evs.length} episodi totali</div>
+  th{text-align:left;padding:6px 8px;background:#fff8f5;font-size:11px;border-bottom:1px solid #eee}
+  td{padding:6px 8px;border-bottom:1px solid #f5f0ee}@media print{body{margin:20px}}</style></head><body>
+  <h1>Flushly — Report per il medico</h1>
+  <div class="meta">Paziente: ${user?.name||''} · ${new Date().toLocaleDateString('it-IT')} · ${evs.length} episodi totali</div>
   <h2>Riepilogo</h2>
   <div class="stat"><div class="num">${evs.length}</div><div class="lbl">episodi totali</div></div>
   <div class="stat"><div class="num">${evs.filter(e=>e.ts>Date.now()-7*86400000).length}</div><div class="lbl">ultimi 7 giorni</div></div>
-  <div class="stat"><div class="num">${avgInt}/5</div><div class="lbl">intensità media</div></div>
+  <div class="stat"><div class="num">${avg}/5</div><div class="lbl">intensità media</div></div>
   <h2>Fattori più frequenti</h2>
-  <table><tr><th>Fattore</th><th>Episodi</th><th>% sul totale</th></tr>
-  ${top5.map(([t,c])=>`<tr><td>${t}</td><td>${c}</td><td>${Math.round(c/evs.length*100)}%</td></tr>`).join('')}
-  </table>
-  <h2>Episodi recenti (ultimi 30)</h2>
+  <table><tr><th>Fattore</th><th>Episodi</th><th>%</th></tr>${top5.map(([t,c])=>`<tr><td>${t}</td><td>${c}</td><td>${Math.round(c/evs.length*100)}%</td></tr>`).join('')}</table>
+  <h2>Episodi (ultimi 30)</h2>
   <table><tr><th>Data e ora</th><th>Intensità</th><th>Durata</th><th>Fattori</th><th>Sonno</th></tr>
-  ${evs.slice(0,30).map(e=>{const d=new Date(e.ts);return`<tr><td>${d.toLocaleDateString('it-IT')} ${d.toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'})}</td><td>${e.intensity}/5</td><td>${e.duration} min</td><td>${e.triggers.join(', ')||'—'}</td><td>${e.sleep&&e.sleep.hours?e.sleep.hours+'h':'—'}</td></tr>`}).join('')}
-  </table>
-  <p style="font-size:11px;color:#a8968e;margin-top:32px">Report generato da Flushly · I dati sono stati raccolti autonomamente dalla paziente tramite app</p>
+  ${evs.slice(0,30).map(e=>{const d=new Date(e.ts);return`<tr><td>${d.toLocaleDateString('it-IT')} ${d.toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'})}</td><td>${e.intensity}/5</td><td>${e.duration}min</td><td>${e.triggers.join(', ')||'—'}</td><td>${e.sleep?.hours?e.sleep.hours+'h':'—'}</td></tr>`}).join('')}</table>
+  <p style="font-size:11px;color:#a8968e;margin-top:32px">Report Flushly · dati raccolti dalla paziente</p>
   <script>window.onload=()=>window.print()<\/script></body></html>`);
   win.document.close();
 }
 
-function clearData() {
-  if (confirm('Cancellare tutti i dati? Questa azione non può essere annullata.')) {
-    state.events = [];
-    save();
-    updateHeader();
-    showToast('Dati cancellati','#D85A30');
+function clearData(){
+  if(!confirm('Cancellare tutti gli episodi?'))return;
+  ud.events=[];scheduleSync();updateHeader();showToast('Dati cancellati','#D85A30');
+}
+
+function showToast(msg,color){
+  const t=document.getElementById('toast');t.textContent=msg;t.style.background=color||'#1D9E75';
+  t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+(async function init(){
+  const code=localStorage.getItem('fl_code');
+  const binId=localStorage.getItem('fl_binid');
+  const name=localStorage.getItem('fl_name');
+  if(code&&binId&&name){
+    user={name,code,binId};
+    setSyncing(true,'Caricamento...');
+    try{
+      const res=await fetch(`${BASE}/${binId}/latest`,{headers:H});
+      const data=await res.json();
+      ud={events:data.record?.events||[],triggers:data.record?.triggers||[...DEFAULT_TRIGGERS]};
+    }catch(e){ud={events:[],triggers:[...DEFAULT_TRIGGERS]};}
+    enterApp();
   }
-}
-
-// INIT
-updateHeader();
-renderTriggers();
-
-// Service Worker registration
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js').catch(()=>{});
-}
+})();
 </script>
 </body>
 </html>
