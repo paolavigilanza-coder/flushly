@@ -365,48 +365,58 @@ let st={intensity:null,sleepQ:null,selectedTriggers:new Set(),insightTab:'freq'}
 let ud={events:[],triggers:[...DEFAULT_TRIGGERS]};
 let syncTimer=null;
 
-function generateCode(name){
+function generateCode(name,binId){
   const c=name.trim().toUpperCase().replace(/[^A-Z]/g,'').slice(0,6);
-  return c+'-'+Math.floor(1000+Math.random()*9000);
+  const num=Math.floor(1000+Math.random()*9000);
+  const shortId=binId.slice(-6);
+  return c+'-'+num+'-'+shortId;
+}
+
+function parseBinIdFromCode(code){
+  const parts=code.split('-');
+  return parts.length===3?parts[2]:null;
 }
 
 async function createUser(){
   const name=document.getElementById('input-name').value.trim();
   if(!name){showToast('Inserisci il tuo nome','#D85A30');return;}
-  const code=generateCode(name);
   setSyncing(true,'Creazione in corso...');
   try{
-    const payload={name,code,events:[],triggers:[...DEFAULT_TRIGGERS]};
-    const res=await fetch(BASE,{method:'POST',headers:{...H,'X-Bin-Name':code,'X-Bin-Private':'false'},body:JSON.stringify(payload)});
+    const tempPayload={name,code:'',events:[],triggers:[...DEFAULT_TRIGGERS]};
+    const res=await fetch(BASE,{method:'POST',headers:{...H,'X-Bin-Private':'false'},body:JSON.stringify(tempPayload)});
     const data=await res.json();
-    if(!data.metadata?.id)throw new Error();
+    if(!data.metadata?.id)throw new Error('no id');
     const binId=data.metadata.id;
+    const code=generateCode(name,binId);
+    const payload={name,code,events:[],triggers:[...DEFAULT_TRIGGERS]};
+    await fetch(`${BASE}/${binId}`,{method:'PUT',headers:H,body:JSON.stringify(payload)});
     localStorage.setItem('fl_code',code);
     localStorage.setItem('fl_binid',binId);
     localStorage.setItem('fl_name',name);
-    user={name,code,binId};
-    ud=payload;
+    user={name,code,binId};ud=payload;
     document.getElementById('code-display').textContent=code;
     document.getElementById('login-screen').classList.add('hidden');
     document.getElementById('code-screen').classList.remove('hidden');
-  }catch(e){showToast('Errore di connessione. Riprova.','#D85A30');}
+  }catch(e){showToast('Errore di connessione. Riprova.','#D85A30');console.error(e);}
   setSyncing(false);
 }
 
 async function loginWithCode(){
   const code=document.getElementById('input-code').value.trim().toUpperCase();
   if(!code){showToast('Inserisci il tuo codice','#D85A30');return;}
-  setSyncing(true,'Ricerca in corso...');
+  setSyncing(true,'Accesso in corso...');
   try{
     const cachedBinId=localStorage.getItem('fl_binid_'+code);
     if(cachedBinId){await loadFromBin(cachedBinId,code);setSyncing(false);return;}
-    const res=await fetch(BASE,{headers:H});
+    const shortId=parseBinIdFromCode(code);
+    if(!shortId){showToast('Codice non valido. Deve essere nel formato NOME-1234-xxxxxx','#D85A30');setSyncing(false);return;}
+    const res=await fetch(`${BASE}?page=1`,{headers:H});
     const bins=await res.json();
     let found=null;
-    if(Array.isArray(bins)){for(const b of bins){if(b.snippetMeta?.name===code){found=b;break;}}}
+    if(Array.isArray(bins)){for(const b of bins){if(b.id&&b.id.endsWith(shortId)){found=b;break;}}}
     if(found){localStorage.setItem('fl_binid_'+code,found.id);await loadFromBin(found.id,code);}
     else{showToast('Codice non trovato. Controlla e riprova.','#D85A30');}
-  }catch(e){showToast('Errore di connessione. Riprova.','#D85A30');}
+  }catch(e){showToast('Errore di connessione. Riprova.','#D85A30');console.error(e);}
   setSyncing(false);
 }
 
@@ -672,3 +682,4 @@ function showToast(msg,color){
 </script>
 </body>
 </html>
+
