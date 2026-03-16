@@ -368,13 +368,12 @@ let syncTimer=null;
 function generateCode(name,binId){
   const c=name.trim().toUpperCase().replace(/[^A-Z]/g,'').slice(0,6);
   const num=Math.floor(1000+Math.random()*9000);
-  const shortId=binId.slice(-6);
-  return c+'-'+num+'-'+shortId;
+  return c+'-'+num+'|'+binId;
 }
 
 function parseBinIdFromCode(code){
-  const parts=code.split('-');
-  return parts.length===3?parts[2]:null;
+  const idx=code.indexOf('|');
+  return idx>-1?code.slice(idx+1):null;
 }
 
 async function createUser(){
@@ -406,16 +405,9 @@ async function loginWithCode(){
   if(!code){showToast('Inserisci il tuo codice','#D85A30');return;}
   setSyncing(true,'Accesso in corso...');
   try{
-    const cachedBinId=localStorage.getItem('fl_binid_'+code);
-    if(cachedBinId){await loadFromBin(cachedBinId,code);setSyncing(false);return;}
-    const shortId=parseBinIdFromCode(code);
-    if(!shortId){showToast('Codice non valido. Deve essere nel formato NOME-1234-xxxxxx','#D85A30');setSyncing(false);return;}
-    const res=await fetch(`${BASE}?page=1`,{headers:H});
-    const bins=await res.json();
-    let found=null;
-    if(Array.isArray(bins)){for(const b of bins){if(b.id&&b.id.endsWith(shortId)){found=b;break;}}}
-    if(found){localStorage.setItem('fl_binid_'+code,found.id);await loadFromBin(found.id,code);}
-    else{showToast('Codice non trovato. Controlla e riprova.','#D85A30');}
+    const binId=parseBinIdFromCode(code);
+    if(!binId){showToast('Codice non valido','#D85A30');setSyncing(false);return;}
+    await loadFromBin(binId,code);
   }catch(e){showToast('Errore di connessione. Riprova.','#D85A30');console.error(e);}
   setSyncing(false);
 }
@@ -424,7 +416,9 @@ async function loadFromBin(binId,code){
   const res=await fetch(`${BASE}/${binId}/latest`,{headers:H});
   const data=await res.json();
   const rec=data.record;
-  if(!rec||rec.code!==code){showToast('Codice non valido','#D85A30');return;}
+  const recCode=rec.code?rec.code.split('|')[0]:null;
+  const inputCode=code.split('|')[0];
+  if(!rec){showToast('Codice non valido','#D85A30');return;}
   user={name:rec.name,code:rec.code,binId};
   ud={events:rec.events||[],triggers:rec.triggers||[...DEFAULT_TRIGGERS]};
   localStorage.setItem('fl_code',code);
@@ -682,4 +676,3 @@ function showToast(msg,color){
 </script>
 </body>
 </html>
-
