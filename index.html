@@ -157,7 +157,7 @@ textarea{resize:none;height:60px}
 
   <div class="login-card">
     <div class="login-label">Inserisci il tuo codice personale</div>
-    <input class="login-input" type="text" id="input-code" placeholder="Es. MARIA-4821" maxlength="20" style="text-transform:uppercase;letter-spacing:0.08em" oninput="this.value=this.value.toUpperCase()">
+    <input class="login-input" type="text" id="input-code" placeholder="Es. MARIA-4821|..." maxlength="100" style="letter-spacing:0.04em;font-size:12px" oninput="formatCodeInput(this)">
     <button class="login-btn" onclick="loginWithCode()" style="background:var(--teal)">Accedi al mio diario</button>
   </div>
 </div>
@@ -401,7 +401,9 @@ async function createUser(){
 }
 
 async function loginWithCode(){
-  const code=document.getElementById('input-code').value.trim().toUpperCase();
+  const raw=document.getElementById('input-code').value.trim();
+  const parts=raw.split('|');
+  const code=parts[0].toUpperCase()+(parts[1]?'|'+parts[1]:'');
   if(!code){showToast('Inserisci il tuo codice','#D85A30');return;}
   setSyncing(true,'Accesso in corso...');
   try{
@@ -656,6 +658,16 @@ function clearData(){
 function showToast(msg,color){
   const t=document.getElementById('toast');t.textContent=msg;t.style.background=color||'#1D9E75';
   t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+function formatCodeInput(el){
+  const val=el.value;
+  const idx=val.indexOf('|');
+  if(idx>-1){
+    el.value=val.slice(0,idx).toUpperCase()+'|'+val.slice(idx+1);
+  } else {
+    el.value=val.toUpperCase();
+  }
 }
 
 (async function init(){
